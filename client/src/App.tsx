@@ -1,8 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css'
+import { hello, moreComplicated } from '../../server/sample-endpoints';
 
 function App() {
+    React.useEffect(() => {
+        (async () => {
+            console.log("wait really", await hello());
+
+            const result = await moreComplicated({n: 5});
+            console.log(result);
+            // type error if you uncomment the next line:
+            // console.log(result.fux);
+            console.log(result.add);
+            return result;
+        })();
+    }, []);
+
   return (
     <div className="App">
       <header className="App-header">
