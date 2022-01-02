@@ -1,12 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css'
-import { hello, moreComplicated } from '../../server/sample-endpoints';
+import { capitalize, hello, moreComplicated } from '../../server/sample-endpoints';
 
 function App() {
     React.useEffect(() => {
         (async () => {
             console.log("wait really", await hello());
+            console.log("wait really", await capitalize({str: 'yeet'}));
 
             const result = await moreComplicated({n: 5});
             console.log(result);
