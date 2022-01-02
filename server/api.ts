@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { ZodObject } from 'zod';
+import { z, ZodObject } from "zod";
 
 export const app = express();
 app.use(express.json());
@@ -41,4 +41,20 @@ export function autoapi(handler: Function, validator: ZodObject<any>) {
 
 export function untyped_autoapi(handler: Function) {
     api(handler.name, handler);
+}
+
+
+export function compactapi<T extends ZodObject<any, "strict", any, any>, R>(
+    name: string,
+    inputValidator: T,
+    impl: (params: z.output<T>) => Promise<R>
+): ((params: z.input<T>) => Promise<R>) {
+    const typedHandler = async (params: z.input<typeof inputValidator>): Promise<R> => {
+        return await impl(inputValidator.parse(params));
+    };
+
+    // register the endpoint
+    api(name, typedHandler);
+
+    return typedHandler;
 }
