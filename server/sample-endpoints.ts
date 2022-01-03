@@ -1,4 +1,4 @@
-import { compactapi, autoapi, untyped_autoapi } from "./api";
+import { strictcompactapi, autoapi, untyped_autoapi } from "./api";
 import { z } from "zod";
 
 
@@ -27,11 +27,12 @@ export async function moreComplicated(params: z.infer<typeof MoreComplicatedPara
 }
 
 
-export const SayHello = compactapi("SayHello", z.strictObject({
+export const SayHello = strictcompactapi("SayHello", z.strictObject({
     firstName: z.string(),
     lastName: z.string(),
 }), async (p) => {
     return `Dear ${p.firstName} ${p.lastName}`;
 })
+
 
 

@@ -5,6 +5,8 @@ async function rpc(route, args) {
         headers: {
             'Content-Type': 'application/json'
         },
+        mode: 'cors',
+        credentials: 'include',
         body: JSON.stringify(args)  
     });
     return await result.json();

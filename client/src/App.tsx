@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css'
 import { capitalize, hello, moreComplicated, SayHello } from '../../server/sample-endpoints';
+import { AddressRecipient } from '../../server/AddressRecipient';
 
 function App() {
     React.useEffect(() => {
@@ -9,6 +10,7 @@ function App() {
             console.log("wait really", await hello());
             console.log("wait really", await capitalize({str: 'yeet'}));
             console.log("subject:", await SayHello({firstName: "Jared", lastName: "Pochtar"}));
+            console.log("subject:", await AddressRecipient({firstName: "Jared", lastName: "Pochtar"}));
 
             const result = await moreComplicated({n: 5});
             console.log(result);
