@@ -1,4 +1,7 @@
 import { app } from './api';
+import './api-playground';
+
+// import all endpoints
 import './sample-endpoints';
 import './AddressRecipient';
 import './stateful';

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { z, ZodObject } from "zod";
+import { StackFrame, getStack } from './StackFrame';
 
 export const app = express();
 app.use(express.json());
@@ -44,7 +45,9 @@ export function api(route: string, handler: (params: any, req?: express.Request,
     });    
 }
 
-// TODO typing the validator and handler
+
+/// Incomplete APIs. Only use these for learning the mechanism, not in prod.
+
 export function autoapi(handler: Function, validator: ZodObject<any>) {
     api(handler.name, async (params: unknown) => {
         return await handler(validator.parse(params));
@@ -73,6 +76,14 @@ export function strictcompactapi<T extends ZodObject<any, "strict", any, any>, R
 
 /// Final API
 
+interface RegisteredTypedEndpoint {
+    name: string;
+    inputValidator: (req: RequestDetails) => any,
+    impl: (params: any) => Promise<any>;
+    location?: StackFrame;
+}
+export const RegisteredTypedEndpoints: RegisteredTypedEndpoint[] = [];
+
 export interface RequestDetails {
     req?: express.Request,
     res?: express.Response,
@@ -90,6 +101,12 @@ export function compactapi<T extends ZodObject<any, "strict", any, any>, R>(
 
     // register the endpoint
     api(name, typedHandler);
+
+    // save the endpoint for metaprogramming
+    RegisteredTypedEndpoints.push({
+        name, inputValidator, impl,
+        location: getStack()[1] ?? undefined
+    });
 
     return typedHandler;
 }
