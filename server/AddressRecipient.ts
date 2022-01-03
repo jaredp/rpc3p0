@@ -6,5 +6,8 @@ export const AddressRecipient = compactapi("AddressRecipient", r => z.strictObje
     lastName: z.string(),
     staff: ReqJwtStaff(r)
 }), async (p) => {
-    return `Dear ${p.firstName} ${p.lastName}, your email address is ${p.staff?.email}`;
+    return {
+        firstLine: `Dear ${p.firstName} ${p.lastName},`,
+        body: `your email address is ${p.staff?.email}`
+    };
 });

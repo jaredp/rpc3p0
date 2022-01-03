@@ -3,7 +3,7 @@ import { z } from "zod";
 
 
 untyped_autoapi(capitalize);
-export function capitalize(params: {str: string}): string {
+export async function capitalize(params: {str: string}): Promise<string> {
     return params.str.toUpperCase();
 }
 
