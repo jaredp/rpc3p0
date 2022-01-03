@@ -71,7 +71,9 @@ export function strictcompactapi<T extends ZodObject<any, "strict", any, any>, R
     return typedHandler;
 }
 
-interface RequestDetails {
+/// Final API
+
+export interface RequestDetails {
     req?: express.Request,
     res?: express.Response,
 }
@@ -92,22 +94,9 @@ export function compactapi<T extends ZodObject<any, "strict", any, any>, R>(
     return typedHandler;
 }
 
-interface User {
-    email: string;
-}
-
 export function ZodInject<T>(factory: () => T) {
     return z.undefined().optional().transform(factory);
 }
 
-export function ReqJwtStaff(r: RequestDetails) {
-    return ZodInject<User>(() => {
-        const token = r.req?.cookies?.['login_token'];
 
-        if (typeof token === 'string') {
-            return {email: token};
-        }
 
-        throw new Error("unauthenticated user");
-    });
-}

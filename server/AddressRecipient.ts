@@ -1,4 +1,5 @@
-import { compactapi, ReqJwtStaff } from "./api";
+import { compactapi } from "./api";
+import { ReqJwtStaff } from "./ReqJwtStaff";
 import { z } from "zod";
 
 export const AddressRecipient = compactapi("AddressRecipient", r => z.strictObject({
