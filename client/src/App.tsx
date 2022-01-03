@@ -1,9 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css'
-import { capitalize, hello, moreComplicated, SayHello } from '../../server/sample-endpoints';
+import { capitalize } from '../../server/sample-endpoints';
 import { AddressRecipient } from '../../server/AddressRecipient';
+import { GetCount, IncrementCount } from '../../server/stateful'
 import { useQuery } from './query-utils';
+import { useMutation } from 'react-query';
 
 function Demo1() {
   const {isLoading, data: recipient} = useQuery(AddressRecipient, {
@@ -35,12 +37,26 @@ function Demo2() {
   </div>
 }
 
+function Demo3() {
+  const {data: count, refetch} = useQuery(GetCount, {});
+  const { mutate } = useMutation(IncrementCount, {onSuccess: () => {
+    refetch();
+  }});
+
+  return <div>
+    <h1>Demo 3</h1>
+    <div>{count}</div>
+    <button onClick={() => mutate({addend: 1})}>Add</button>
+  </div>
+}
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Demo1 />
         <Demo2 />
+        <Demo3 />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
