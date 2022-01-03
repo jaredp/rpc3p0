@@ -22,6 +22,12 @@ export function api(route: string, handler: (params: any, req?: express.Request,
         const input = req.body;
         try {
             const output = await Promise.resolve(handler(input, req, res));
+            if (output === undefined) {
+                // if the function rpc returns void, let's send null so the
+                // client, which is always going to JSON.parse(res.body),
+                // doesn't throw trying to parse the empty string.
+                return res.json(null);
+            }
             res.json(output);
         } catch (err) {
             console.error("Caught error in", route, err);
@@ -90,8 +96,12 @@ interface User {
     email: string;
 }
 
+export function ZodInject<T>(factory: () => T) {
+    return z.undefined().optional().transform(factory);
+}
+
 export function ReqJwtStaff(r: RequestDetails) {
-    return z.undefined().optional().transform((_u): User => {
+    return ZodInject<User>(() => {
         const token = r.req?.cookies?.['login_token'];
 
         if (typeof token === 'string') {
