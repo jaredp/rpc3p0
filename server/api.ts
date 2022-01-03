@@ -24,9 +24,10 @@ export function api(route: string, handler: (params: any, req?: express.Request,
             const output = await Promise.resolve(handler(input, req, res));
             res.json(output);
         } catch (err) {
-            console.error(err);
+            console.error("Caught error in", route, err);
             if (DEBUG) {
                 res.status(500).json({
+                    message: err instanceof Error ? err.message : undefined,
                     error: err,
                     stack: err instanceof Error ? err.stack?.split('\n') : null
                 });
@@ -90,11 +91,13 @@ interface User {
 }
 
 export function ReqJwtStaff(r: RequestDetails) {
-    return z.undefined().optional().transform((_u): User|null => {
+    return z.undefined().optional().transform((_u): User => {
         const token = r.req?.cookies?.['login_token'];
+
         if (typeof token === 'string') {
             return {email: token};
         }
-        return null;
+
+        throw new Error("unauthenticated user");
     });
 }

@@ -9,7 +9,17 @@ async function rpc(route, args) {
         credentials: 'include',
         body: JSON.stringify(args)  
     });
-    return await result.json();
+    if (result.status === 200) {
+        return await result.json();
+    }
+
+    let error_detail = null;
+    try {
+        error_detail = await result.json();
+    } catch (error) {}
+
+    console.error(`[RPC ${route}]`, result, error_detail);
+    throw new Error(`[RPC ${route}] ${error_detail?.message || ""}`);
 }
 
 function rpcFactory(route) {
