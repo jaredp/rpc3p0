@@ -1470,6 +1470,11 @@ yn@3.1.1:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
+zod-to-ts@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/zod-to-ts/-/zod-to-ts-0.1.0.tgz#8741f32f84b2d95a59c8866b4d6f70e8f1fc703b"
+  integrity sha512-MBuE4XXoo1L51/zWNHFlFdQiNekt+WinFt/z0uW/VdK5AtxfetYZUrzfQ5SamJIOI+fyKhkBiIgYlBk17AxAvQ==
+
 zod@^3.11.6:
   version "3.11.6"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.11.6.tgz#e43a5e0c213ae2e02aefe7cb2b1a6fa3d7f1f483"

@@ -1,5 +1,6 @@
 import { app, RegisteredTypedEndpoints } from "./api";
 import _ from 'lodash';
+import { createTypeAlias, printNode, zodToTs } from "zod-to-ts";
 
 app.get('/api/playground', (req, res) => {
     const root_dir = process.cwd();
@@ -19,15 +20,30 @@ app.get('/api/playground', (req, res) => {
             h1 {
                 margin: 1em 0em;
             }
+
+            td {
+                vertical-align: top;
+                padding-bottom: 30px;
+                padding-right: 80px;
+            }
         </style>
         </head>
         <body>
             <h1>Server Endpoints</h1>
             <table>
                 ${ RegisteredTypedEndpoints.map(endpoint => {
+                    const mockedValidator = endpoint.inputValidator({});
+                    const inpuTypeName = `${endpoint.name}Params`;
+                    const ppTsType = printNode(
+                        createTypeAlias(
+                            zodToTs(mockedValidator, inpuTypeName).node,
+                            inpuTypeName
+                        )
+                    ).trim();
+
                     return `
                         <tr>
-                            <td style="padding-bottom: 1em">
+                            <td style="">
                                 <div style="font-size: 18px; font-family: monospace">
                                     ${ endpoint.name }
                                 </div>
@@ -36,6 +52,8 @@ app.get('/api/playground', (req, res) => {
                                 </div>
                             </td>
                             <td>
+                                <div style="font-family: monospace; white-space: pre"
+                                >${ ppTsType }</div>
                             </td>
                         </tr>
                     `;
