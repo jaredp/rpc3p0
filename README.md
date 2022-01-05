@@ -10,8 +10,7 @@ Graphql without the boilerplate
 # Running
 
 ```
-(cd client && yarn start)
-(cd server && yarn start)
+(cd client && yarn start) && (cd server && yarn start)
 ```
 
 # Push safety (schema checks)
