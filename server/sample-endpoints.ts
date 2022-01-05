@@ -1,18 +1,6 @@
-import { strictcompactapi, autoapi, untyped_autoapi } from "./api-lib/api";
+import { strictcompactapi, autoapi } from "./api-lib/api";
 import { z } from "zod";
 
-
-untyped_autoapi(capitalize);
-export async function capitalize(params: {str: string}): Promise<string> {
-    return params.str.toUpperCase();
-}
-
-
-const HelloParams = z.object({});
-autoapi(hello, HelloParams);
-export function hello() {
-    return "world!";
-}
 
 const MoreComplicatedParams = z.object({
     n: z.number()

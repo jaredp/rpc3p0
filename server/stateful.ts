@@ -3,8 +3,7 @@ import { z } from "zod";
 
 let count = 0;
 
-export const GetCount = compactapi('GetCount', r => z.strictObject({
-}), async (p) => {
+export const GetCount = compactapi('GetCount', r => z.strictObject({}), async p => {
     return count;
 });
 
