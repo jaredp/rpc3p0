@@ -1,4 +1,4 @@
-import { RequestDetails, ZodInject } from './api';
+import { RequestDetails, ZodInject } from './api-lib/api';
 
 interface User {
     email: string;

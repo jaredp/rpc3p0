@@ -1,4 +1,4 @@
-import { compactapi } from "./api";
+import { compactapi } from "./api-lib/api";
 import { ReqJwtStaff } from "./ReqJwtStaff";
 import { z } from "zod";
 

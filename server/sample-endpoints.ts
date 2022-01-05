@@ -1,4 +1,4 @@
-import { strictcompactapi, autoapi, untyped_autoapi } from "./api";
+import { strictcompactapi, autoapi, untyped_autoapi } from "./api-lib/api";
 import { z } from "zod";
 
 

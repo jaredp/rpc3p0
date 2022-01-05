@@ -1,12 +1,11 @@
-import { app } from './api';
-import './api-playground';
+import { app } from './api-lib/api';
+import { config } from './api-lib/config';
+import './api-lib/api-playground';
+import './import-all-endpoints';
 
-// import all endpoints
-import './sample-endpoints';
-import './AddressRecipient';
-import './stateful';
-
+config.DEBUG = true;
 const port = 9001;
+
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });

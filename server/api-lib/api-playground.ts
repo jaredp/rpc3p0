@@ -1,8 +1,14 @@
 import { app, RegisteredTypedEndpoints } from "./api";
 import _ from 'lodash';
 import { createTypeAlias, printNode, zodToTs } from "zod-to-ts";
+import { config } from './config';
 
 app.get('/api/playground', (req, res) => {
+    if (!config.DEBUG) {
+        res.sendStatus(401);
+        return;
+    }
+
     const root_dir = process.cwd();
 
     res.send(`

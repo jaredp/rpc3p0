@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { z, ZodObject } from "zod";
-import { StackFrame, getStack } from './StackFrame';
+import { StackFrame, getStack } from '../StackFrame';
+import { config } from './config';
 
 export const app = express();
 app.use(express.json());
@@ -15,8 +16,6 @@ app.use(cors({
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
-const DEBUG = true;
 
 export function api(route: string, handler: (params: any, req?: express.Request, res?: express.Response) => any) {
     app.post(`/api/v1/${route}`, async (req, res) => {
@@ -32,7 +31,7 @@ export function api(route: string, handler: (params: any, req?: express.Request,
             res.json(output);
         } catch (err) {
             console.error("Caught error in", route, err);
-            if (DEBUG) {
+            if (config.DEBUG) {
                 res.status(500).json({
                     message: err instanceof Error ? err.message : undefined,
                     error: err,

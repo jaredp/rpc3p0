@@ -1,4 +1,4 @@
-import { compactapi } from "./api";
+import { compactapi } from "./api-lib/api";
 import { z } from "zod";
 
 let count = 0;

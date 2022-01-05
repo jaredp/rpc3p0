@@ -4,11 +4,11 @@ import './App.css'
 import { capitalize } from '../../server/sample-endpoints';
 import { AddressRecipient } from '../../server/AddressRecipient';
 import { GetCount, IncrementCount } from '../../server/stateful'
-import { useQuery } from './query-utils';
+import { useRpcQuery } from './query-utils';
 import { useMutation } from 'react-query';
 
 function Demo1() {
-  const {isLoading, data: recipient} = useQuery(AddressRecipient, {
+  const {isLoading, data: recipient} = useRpcQuery(AddressRecipient, {
     firstName: "Jared",
     lastName: "Pochtar"
   });
@@ -26,7 +26,7 @@ function Demo1() {
 
 function Demo2() {
   const [text, setText] = React.useState('yeet');
-  const {data} = useQuery(capitalize, {
+  const {data} = useRpcQuery(capitalize, {
     str: text
   });
 
@@ -38,7 +38,7 @@ function Demo2() {
 }
 
 function Demo3() {
-  const {data: count, refetch} = useQuery(GetCount, {});
+  const {data: count, refetch} = useRpcQuery(GetCount, {});
   const { mutate } = useMutation(IncrementCount, {onSuccess: () => {
     refetch();
   }});
