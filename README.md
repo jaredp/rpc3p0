@@ -57,10 +57,9 @@ ts-node -T -e "import * as ps from './api-lib/pushsafety/check-pushsafety.ts'; p
 
 
 # Future work needed
-1. implement push safety (`(cd server && tsc --declaration --emitDeclarationOnly --outDir types)`!)
-2. lint rule to enforce matching exported name with API name. (Or find some better way to not duplicate it. Like auto-import, which also removes the need for a bunch of `index.ts` files.)
-3. Check no two endpoints have the same name 
-4. Webpack has some issues with re-type-checking when the server code changes. I think it’s caching the server code because it’s outside `src/`. VSCode gets this right beautifully, so I’m not too worried.
-5. syntax: rid of explicit `z.strictObject`
-6. pushsafety could use [https://github.com/microsoft/TypeScript-Website/tree/v2/packages/typescript-vfs](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/typescript-vfs) to not have to touch disk or litter the filesystem. See [https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API) as well, which may have more directly useful APIs
-7. consider [https://typedoc.org/](https://typedoc.org/) for the playground. Otoh, “exploring” should be discouraged
+1. lint rule to enforce matching exported name with API name. (Or find some better way to not duplicate it. Like auto-import, which also removes the need for a bunch of `index.ts` files.)
+2. Boot time assert that no two endpoints have the same name 
+3. Webpack has some issues with re-type-checking when the server code changes. I think it’s caching the server code because it’s outside `src/`. VSCode gets this right beautifully, so I’m not too worried.
+4. syntax: rid of explicit `z.strictObject`
+5. pushsafety could use [https://github.com/microsoft/TypeScript-Website/tree/v2/packages/typescript-vfs](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/typescript-vfs) to not have to touch disk or litter the filesystem. See [https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API) as well, which may have more directly useful APIs
+6. consider [https://typedoc.org/](https://typedoc.org/) for the playground. Otoh, “exploring” should be discouraged
