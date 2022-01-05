@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { z, ZodObject } from "zod";
-import { StackFrame, getStack } from '../StackFrame';
+import { StackFrame, getStack } from './StackFrame';
 import { config } from './config';
 
 export const app = express();

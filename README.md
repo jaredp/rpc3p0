@@ -19,11 +19,10 @@ Note: this is extremely janky
 
 ```
 # Schema checks (Pushsafety)!
-ts-node -T -e "import * as ps from './api-lib/check-pushsafety.ts'; ps.run_check()"
+ts-node -T -e "import * as ps from './api-lib/pushsafety/check-pushsafety.ts'; ps.run_check()"
 
 # To rebuild (fake a push):
-rm -rf pushsafety-tmp
-./api-lib/mock-push-prod-for-types-demo.sh
+./api-lib/pushsafety/mock-push-prod-for-types-demo.sh
 ```
 
 # Playground (a-la Graphql Playground)

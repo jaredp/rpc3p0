@@ -2,12 +2,12 @@
 Usage:
 
 build prod-types with:
-    ./api-lib/mock-push-prod-for-types-demo.sh
+    ./api-lib/pushsafety/mock-push-prod-for-types-demo.sh
 Will have to do that at build time, tar gz it, upload
 Then at check time, curl | tar gz it into a known dir
 
-ts-node -T -e "import * as ps from './api-lib/check-pushsafety.ts'; ps.run_check()"
-ts-node -T -e "import * as ps from './api-lib/check-pushsafety.ts'; ps.list_endpoints()"
+ts-node -T -e "import * as ps from './api-lib/pushsafety/check-pushsafety.ts'; ps.run_check()"
+ts-node -T -e "import * as ps from './api-lib/pushsafety/check-pushsafety.ts'; ps.list_endpoints()"
 
 */
 
@@ -17,8 +17,8 @@ import path from 'path';
 import _ from 'lodash';
 import { promises as fs } from 'fs';
 
-import '../import-all-endpoints';
-import { RegisteredTypedEndpoints } from './api';
+import '../../import-all-endpoints';
+import { RegisteredTypedEndpoints } from '../api';
 
 
 function esimport_for_file_path(file: string) {
