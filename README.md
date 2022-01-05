@@ -4,13 +4,13 @@ Graphql without the boilerplate
 # Setup
 
 1. Clone the repo
-2. `(cd client && yarn)`
-3. `(cd server && yarn)`
+2. `(cd client && yarn) && (cd server && yarn)`
 
 # Running
 
 ```
-(cd client && yarn start) && (cd server && yarn start)
+(cd client && yarn start)
+(cd server && yarn start)
 ```
 
 # Push safety (schema checks)
