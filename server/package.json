@@ -25,5 +25,8 @@
     "typescript": "^4.5.4",
     "zod": "^3.11.6",
     "zod-to-ts": "^0.1.0"
+  },
+  "devDependencies": {
+    "execa": "^6.0.0"
   }
 }
