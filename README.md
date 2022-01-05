@@ -13,6 +13,10 @@ Graphql without the boilerplate
 (cd server && yarn start)
 ```
 
+The client is at http://localhost:3000/ and the server is at http://localhost:9001/
+
+The server inspector (https://nodejs.org/en/docs/guides/debugging-getting-started/) is on port 9000.
+
 # Push safety (schema checks)
 Note: this is extremely janky
 
