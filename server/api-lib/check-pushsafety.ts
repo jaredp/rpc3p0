@@ -2,7 +2,7 @@
 Usage:
 
 build prod-types with:
-  (cd server && tsc --declaration --emitDeclarationOnly --outDir pushsafety-tmp/types)
+    ./api-lib/mock-push-prod-for-types-demo.sh
 Will have to do that at build time, tar gz it, upload
 Then at check time, curl | tar gz it into a known dir
 
